@@ -58,6 +58,16 @@ export default function Todo() {
     }));
   };
 
+   useEffect(()=>{
+    const localTodo= localStorage.getItem("todos")
+    if (localTodo) {
+      setTodos(JSON.parse(localTodo))
+    }
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("todos", JSON.stringify(todos));
+  },[todos])
   return (
     <div className="w-full min-h-screen p-4 sm:p-6 md:p-10 bg-base-100">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
