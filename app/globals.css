@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 * {
   font-family: "Schoolbell", cursive;
   font-weight: 400;
   font-style: normal;
 }
+
+
 
