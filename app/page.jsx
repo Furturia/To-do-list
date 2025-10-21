@@ -18,16 +18,9 @@ export default function Todo() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      name: "Int222",
-      description: "sisisi",
+      name: "Initial",
+      description: "initial state",
       status: false,
-      createdAt: getNewDate(),
-    },
-    {
-      id: 2,
-      name: "Int212",
-      description: "noy most",
-      status: true,
       createdAt: getNewDate(),
     },
   ]);
@@ -63,16 +56,16 @@ export default function Todo() {
     resetForm();
   };
 
-  const htmlClass = document.getElementsByTagName("html")[0].classList;
   useEffect(() => {
     const localTodo = localStorage.getItem("todos");
     const localTheme = localStorage.getItem("theme");
+
     if (localTodo) {
       setTodos(JSON.parse(localTodo));
     }
 
     if (localTheme == "dark") {
-      htmlClass.add("dark");
+      document.getElementsByTagName("html")[0].classList.add("dark");
       setDarkOpen(true);
     }
   }, []);
@@ -82,9 +75,10 @@ export default function Todo() {
   }, [todos]);
 
   const toggleDarkMode = () => {
-    htmlClass.toggle("dark");
-    const isDark = htmlClass.contains("dark");
-    console.log(isDark);
+    document.getElementsByTagName("html")[0].classList.toggle("dark");
+    const isDark = document
+      .getElementsByTagName("html")[0]
+      .classList.contains("dark");
 
     localStorage.setItem("theme", isDark ? "dark" : "light");
     setDarkOpen(isDark);
@@ -293,7 +287,9 @@ export default function Todo() {
               </button>
               <button
                 disabled={!formData.name}
-                className={`px-4 sm:px-6 py-2 cursor-pointer bg-black text-white rounded-xl transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex-1 sm:flex-none dark:bg-white dark:text-black  ${formData.name && 'dark:hover:bg-gray-200 hover:bg-gray-800 '}`}
+                className={`px-4 sm:px-6 py-2 cursor-pointer bg-black text-white rounded-xl transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex-1 sm:flex-none dark:bg-white dark:text-black  ${
+                  formData.name && "dark:hover:bg-gray-200 hover:bg-gray-800 "
+                }`}
                 onClick={addNewTodo}
               >
                 Add To Do
